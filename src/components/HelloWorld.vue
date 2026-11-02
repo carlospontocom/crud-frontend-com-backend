@@ -48,7 +48,8 @@ const remove = async (id) => {
 
 <template>
   <section class="container">
-    <div>
+    <h1 class="title__main">Cadastro simples</h1>
+    <form class="form" @submit.prevent="add">
       <input
         class="field"
         v-model="novoNome"
@@ -61,17 +62,18 @@ const remove = async (id) => {
         placeholder="Email..."
         @keyup.enter="add"
       />
-      <button @click="add" class="btn btn__solid">Adicionar</button>
-    </div>
+      <button type="submit" class="btn btn__solid">Adicionar</button>
+    </form>
 
     <!-- Lista de registros -->
-    <ul>
-      <li v-for="item in contatos" :key="item.id">
-        <h2>
-          {{ item.id }} - {{ item.nome }} - <strong>E-mail:</strong>
-          {{ item.email }}
-        </h2>
-        <button @click="remove(item.id)">X</button>
+    <ul class="cards">
+      <li v-for="item in contatos" :key="item.id" class="card__user">
+        <p class="card__nome">
+            {{ item.nome }} 
+            </p>
+            <p class="card__email"><strong>E-mail:</strong>
+          {{ item.email }} </p>
+         <button @click="remove(item.id)" class="btn btn__remove">X</button>
       </li>
     </ul>
   </section>
@@ -88,22 +90,55 @@ li {
 }
 
 .container {
-  background: gray;
+   padding: 3%;
+   margin: 0 auto;
+   max-width: 600px;
+}
+
+.title__main{
+  padding:1rem;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  gap:15px;
 }
 
 .field {
   padding: 12px;
-  border: 0;
+  border: 1px solid #CCC;
   border-radius: 5px;
 }
 
 .btn {
+  border: 0;
   padding: 10px;
   cursor: pointer;
 }
 
 .btn__solid {
-  background: blue;
+  background: rgb(105, 105, 234);
+  color: white;
+}
+
+.cards{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap:1em;
+}
+
+.card__user{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  border:1px solid #ccc;
+  padding: 1rem;
+}
+
+.btn__remove{
+  background-color: tomato;
   color: white;
 }
 </style>
